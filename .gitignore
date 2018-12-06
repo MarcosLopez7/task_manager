@@ -1,0 +1,17 @@
+env/*
+.idea/*
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+
+### Python ###
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
