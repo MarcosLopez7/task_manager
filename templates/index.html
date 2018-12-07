@@ -7,5 +7,19 @@
 
     <h1>Task Managers</h1>
 
+    <h3>Important task</h3>
 
+    <ul>
+        {% for task in important_task %}
+            <li><a href="{% url 'tasks:task' pk=task.pk %}"> {{ task.name }} </a></li>
+        {% endfor %}
+    </ul>
+
+    <h3>Today Task</h3>
+
+    <ul>
+        {% for task in today_task %}
+            <li><a href="{% url 'tasks:task' pk=task.pk %}"> {{ task.name }} </a></li>
+        {% endfor %}
+    </ul>
 {% endblock %}

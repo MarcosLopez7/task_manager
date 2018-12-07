@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% load static from staticfiles %}
+
+{% block title %}Task{% endblock %}
+
+{% block content %}
+
+    <h1>{{ task.name }}</h1>
+
+    {{ task.how }}
+    {{ task.reason }}
+    {{ task.duration }}
+    {{ task.priority }}
+    {{ task.deadline_date }}
+
+    <form method="post" action="{% url 'tasks:task-action' pk=task.pk %}"  class="mt-5">
+        {% csrf_token %}
+
+        {% for field in update_form %}
+
+            <div class="form-group">
+                {% if field.errors %}
+                    {{ field.errors }}
+                {% endif %}
+                {{ field }}
+                {{ field.label }}
+            </div>
+        {% endfor %}
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+{% endblock %}

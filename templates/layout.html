@@ -13,6 +13,15 @@
     <header>
         <nav class="navbar fixed-top bg-dark">
             <a href="/">Home</a>
+
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'tasks:todo' %}">TODO</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'tasks:done' %}">Done</a>
+                </li>
+            </ul>
         </nav>
     </header>
 
