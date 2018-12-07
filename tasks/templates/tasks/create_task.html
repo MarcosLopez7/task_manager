@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% load static from staticfiles %}
+
+{% block title %}Create task{% endblock %}
+
+{% block content %}
+
+    <h1 class="text-sm-center mt-3">Create Task</h1>
+
+    <form method="post" action=""  class="mt-5">
+        {% csrf_token %}
+
+        {% for field in form %}
+
+            <div class="form-group">
+                {% if field.errors %}
+                    {{ field.errors }}
+                {% endif %}
+                {{ field }}
+                {% if field.label == 'Important for today' or field.label == 'Is for today?' %}
+                    {{ field.label }}
+                {% endif %}
+            </div>
+        {% endfor %}
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+{% endblock %}

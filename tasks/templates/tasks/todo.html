@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% load static from staticfiles %}
+
+{% block title %}Inicio de sesión{% endblock %}
+
+{% block content %}
+
+    <h1>{{ title }}</h1>
+
+    <ul>
+        {% for task in tasks %}
+            <li>
+                <a href="{% url 'tasks:task' pk=task.pk %}"> {{ task.name }} </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
