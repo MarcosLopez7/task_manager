@@ -11,7 +11,7 @@
 
     <ul>
         {% for task in important_task %}
-            <li><a href="{% url 'tasks:task' pk=task.pk %}"> {{ task.name }} </a></li>
+            <li><a href="{% url 'tasks:edit-task' pk=task.pk %}"> {{ task.name }} </a></li>
         {% endfor %}
     </ul>
 
@@ -19,7 +19,7 @@
 
     <ul>
         {% for task in today_task %}
-            <li><a href="{% url 'tasks:task' pk=task.pk %}"> {{ task.name }} </a></li>
+            <li><a href="{% url 'tasks:edit-task' pk=task.pk %}"> {{ task.name }} </a></li>
         {% endfor %}
     </ul>
 {% endblock %}

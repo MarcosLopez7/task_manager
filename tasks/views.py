@@ -56,6 +56,24 @@ def create_task(request):
 
     return render(request, 'tasks/create_task.html', context)
 
+def edit_task(request, pk):
+    task = get_object_or_404(Task, pk=pk)
+    form = TaskForm(request.POST or None, instance=task )
+
+    context = {
+        'form': form
+    }
+
+    if form.is_valid():
+        instance = form.save(commit=False)
+        instance.save()
+
+        return redirect('/tasks/task/{0}/'.format(instance.pk))
+    else:
+        context['form'] = form
+    return render(request, 'tasks/create_task.html', context)
+
+
 def task_action(request, pk):
 
     task = get_object_or_404(Task, pk=pk)

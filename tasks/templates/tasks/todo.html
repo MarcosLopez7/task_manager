@@ -10,7 +10,7 @@
     <ul>
         {% for task in tasks %}
             <li>
-                <a href="{% url 'tasks:task' pk=task.pk %}"> {{ task.name }} </a>
+                <a href="{% url 'tasks:edit-task' pk=task.pk %}"> {{ task.name }} </a>
             </li>
         {% endfor %}
     </ul>
