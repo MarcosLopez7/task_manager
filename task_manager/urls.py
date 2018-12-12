@@ -17,10 +17,11 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url, include
 
-from .views import index
+from .views import index, sign_in
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url(r'^tasks/', include('tasks.urls', namespace='tasks')),
-    url(r'^$', index, name='home')
+    path('login/', sign_in, name='login'),
+    path('tasks/', include('tasks.urls', namespace='tasks')),
+    path('', index, name='home')
 ]
