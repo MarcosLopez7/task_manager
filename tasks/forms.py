@@ -7,7 +7,7 @@ class TaskForm(forms.ModelForm):
     name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Name task'}))
     reason = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Why do I it?'}), required=False)
     how =  forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'How can I do it?'}), required=False)
-    deadline_date = forms.DecimalField(widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Hours duration'}), required=False)
+    duration = forms.DecimalField(widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Hours duration'}), required=False)
     important_today = forms.BooleanField(widget=forms.CheckboxInput(), label='Important for today', required=False)
     priority = forms.IntegerField(widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Priority task'}))
     for_today = forms.BooleanField(widget=forms.CheckboxInput(), label='Is for today?', required=False)
@@ -20,7 +20,7 @@ class TaskForm(forms.ModelForm):
             'name',
             'reason',
             'how',
-            'deadline_date',
+            'duration',
             'important_today',
             'priority',
             'for_today',

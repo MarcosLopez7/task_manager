@@ -11,7 +11,19 @@
 
     <ul>
         {% for task in important_task %}
-            <li><a href="{% url 'tasks:task' pk=task.pk %}"> {{ task.name }} </a></li>
+            <li>
+                <div class="row">
+                    <div class="col">
+                        <a href="{% url 'tasks:task' pk=task.pk %}"> {{ task.name }} </a>
+                    </div>
+                    <div class="col">
+                        <form action="{% url 'tasks:task-action' pk=task.pk action='Done' %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-success">Done</button>
+                        </form>
+                    </div>
+                </div>
+            </li>
         {% endfor %}
     </ul>
 
@@ -19,7 +31,19 @@
 
     <ul>
         {% for task in today_task %}
-            <li><a href="{% url 'tasks:task' pk=task.pk %}"> {{ task.name }} </a></li>
+            <li>
+                <div class="row">
+                    <div class="col">
+                        <a href="{% url 'tasks:task' pk=task.pk %}"> {{ task.name }} </a>
+                    </div>
+                    <div class="col">
+                        <form action="{% url 'tasks:task-action' pk=task.pk action='Done' %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-success">Done</button>
+                        </form>
+                    </div>
+                </div>
+            </li>
         {% endfor %}
     </ul>
 {% endblock %}

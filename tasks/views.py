@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse
 
 from .models import Task
 from .forms import TaskForm, UpdateTaskForm
@@ -56,20 +57,41 @@ def create_task(request):
 
     return render(request, 'tasks/create_task.html', context)
 
-def task_action(request, pk):
+def edit_task(request, pk):
+    task = get_object_or_404(Task, pk=pk)
+    form = TaskForm(request.POST or None, instance=task )
 
+    context = {
+        'form': form
+    }
+
+    if form.is_valid():
+        instance = form.save(commit=False)
+        instance.save()
+
+        return redirect(reverse("tasks:task", kwargs={"pk": task.pk}))
+    else:
+        context['form'] = form
+    return render(request, 'tasks/create_task.html', context)
+
+
+def task_action(request, pk, action):
     task = get_object_or_404(Task, pk=pk)
 
     if request.method == 'POST':
-        form = UpdateTaskForm(request.POST or None)
-        if form.is_valid():
-            instance = form.save(commit=False)
-            task.for_today = instance.for_today
-            task.done = instance.done
-            task.important_today = instance.important_today
+        if action == 'Delete':
+            task.delete()
+            return redirect(reverse("tasks:todo"))
+        elif action == 'Done':
+            task.done = True
+            task.for_today = False
+            task.important_today = False
+            task.save()
+        elif action == 'Today':
+            task.for_today = True
+            task.save()
+        elif action == 'Important':
+            task.important_today = True
             task.save()
 
-            return redirect('/tasks/todo/')
-    else:
-        return redirect('/tasks/task/{0}/'.format(task.pk))
-
+    return redirect(reverse("tasks:task", kwargs={"pk": pk}))
