@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% load static from staticfiles %}
 
-{% block title %}Inicio de sesión{% endblock %}
+{% block title %}TODO{% endblock %}
 
 {% block content %}
 
@@ -10,7 +10,38 @@
     <ul>
         {% for task in tasks %}
             <li>
-                <a href="{% url 'tasks:edit-task' pk=task.pk %}"> {{ task.name }} </a>
+                <div class="row">
+                    {% if title == 'TO DO Task' %}
+                        <div class="col"><a href="{% url 'tasks:edit-task' pk=task.pk %}"> {{ task.name }} </a></div>
+                        <div class="col">
+                            <form action="{% url 'tasks:task-action' pk=task.pk action='Important' %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-primary">Important for Today</button>
+                            </form>
+
+                        </div>
+                        <div class="col">
+                            <form action="{% url 'tasks:task-action' pk=task.pk action='Today' %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-secondary">For Today</button>
+                            </form>
+                        </div>
+                        <div class="col">
+                            <form action="{% url 'tasks:task-action' pk=task.pk action='Done' %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-success">Done</button>
+                            </form>
+                        </div>
+                    {% elif title == 'DONE' %}
+                        <div class="col"><a href="{% url 'tasks:task' pk=task.pk %}"> {{ task.name }} </a></div>
+                    {% endif %}
+                    <div class="col">
+                            <form action="{% url 'tasks:task-action' pk=task.pk action='Delete' %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </div>
+                </div>
             </li>
         {% endfor %}
     </ul>

@@ -13,20 +13,12 @@
     {{ task.priority }}
     {{ task.deadline_date }}
 
-    <form method="post" action="{% url 'tasks:task-action' pk=task.pk %}"  class="mt-5">
-        {% csrf_token %}
 
-        {% for field in update_form %}
-
-            <div class="form-group">
-                {% if field.errors %}
-                    {{ field.errors }}
-                {% endif %}
-                {{ field }}
-                {{ field.label }}
-            </div>
-        {% endfor %}
-
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+    {% if not task.done %}
+        <form action="{% url 'tasks:edit-task' pk=task.pk%}">
+            <button class="btn btn-primary" type="submit">
+                Edit Task
+            </button>
+        </form>
+    {% endif %}
 {% endblock %}

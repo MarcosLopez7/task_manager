@@ -1,5 +1,4 @@
 from django import forms
-from django.contrib.admin import widgets
 
 from .models import Task
 
@@ -12,8 +11,8 @@ class TaskForm(forms.ModelForm):
     important_today = forms.BooleanField(widget=forms.CheckboxInput(), label='Important for today', required=False)
     priority = forms.IntegerField(widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Priority task'}))
     for_today = forms.BooleanField(widget=forms.CheckboxInput(), label='Is for today?', required=False)
-    init_date = forms.DateTimeField(input_formats=["%d %b %Y %H:%M:%S %Z"], label='Init date', required=False)
-    end_date = forms.DateTimeField(widget=widgets.AdminSplitDateTime(), label='end date', required=False)
+    init_date = forms.DateTimeField(widget=forms.DateTimeInput, label='Init date', required=False)
+    end_date = forms.DateTimeField(widget=forms.DateTimeInput, label='end date', required=False)
 
     class Meta:
         model = Task
